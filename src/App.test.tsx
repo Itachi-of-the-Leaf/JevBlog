@@ -33,6 +33,10 @@ describe("Jev notes article", () => {
     const laya = container.querySelector("#laya");
     expect(laya?.textContent).not.toMatch(/hackathon|100\/100|grading/i);
     expect(container.querySelector("#day")?.textContent?.match(/hackathon/gi)).toHaveLength(3);
+    expect(container.querySelector("#day")?.textContent).toMatch(/24-hour hackathon began at 3pm/);
+    expect(container.querySelector("#day")?.textContent).toMatch(/six or seven hours on system design/);
+    expect(container.querySelector("#day")?.textContent).toMatch(/first code came around 8 or 9pm/);
+    expect(container.querySelector("#day")?.textContent).toMatch(/theory round came first/);
     expect(container.querySelector("#day")?.textContent).toMatch(/100\/100/);
   });
 

@@ -84,8 +84,8 @@ function App() {
           <a href="#jev">01 — Jev and System One</a>
           <a href="#uncertainty">02 — Confidence</a>
           <a href="#training">03 — Training objective</a>
-          <a href="#build">04 — Example use</a>
-          <a href="#laya">05 — Laya</a>
+          <a href="#laya">04 — Laya</a>
+          <a href="#build">05 — Example use</a>
           <a href="#day">06 — A short personal note</a>
         </aside>
         <div className="story">
@@ -276,9 +276,11 @@ function App() {
             </div>
             <h2>One detail from the hackathon</h2>
             <p>
-              Our hackathon began at 3pm. After six or seven hours of system
-              design, we started coding around 8 or 9pm—and scored 100/100 in
-              the first theory round.
+              Our 24-hour hackathon began at 3pm. We spent the first six or
+              seven hours on system design, so our first code came around 8 or
+              9pm. The theory round came first, and we scored 100/100. That
+              result was a nice early boost; the long design discussion shaped
+              what we built next.
             </p>
           </section>
         </div>
