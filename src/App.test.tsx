@@ -29,10 +29,15 @@ describe("Jev notes article", () => {
     expect(container.querySelector(".pipeline-jev")?.textContent).toMatch(/Choice.*Score.*Noul/);
     expect(screen.getByText(/Imagine handing a school office a note and asking one clear question/i).closest("#jev")).toBeTruthy();
     expect(screen.getByRole("heading", { name: /a separate project from Convai Innovations/i })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: /one detail from the hackathon/i })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: /how i used jev in a hackathon/i })).toBeTruthy();
+    expect(container.querySelector("#day figure.hackathon-flow")).toHaveAccessibleName(/reply triage/i);
+    expect(screen.getByText(/roughly 400 times faster/i)).toBeTruthy();
+    expect(screen.getByText(/double-digit milliseconds/i)).toBeTruthy();
+    expect(screen.getByRole("link", { name: /04 — Laya/i }).getAttribute("href")).toBe("#laya");
+    expect(screen.getByRole("link", { name: /05 — Example use/i }).getAttribute("href")).toBe("#build");
     const laya = container.querySelector("#laya");
     expect(laya?.textContent).not.toMatch(/hackathon|100\/100|grading/i);
-    expect(container.querySelector("#day")?.textContent?.match(/hackathon/gi)).toHaveLength(3);
+    expect(container.querySelector("#day")?.textContent?.match(/hackathon/gi)).toHaveLength(4);
     expect(container.querySelector("#day")?.textContent).toMatch(/24-hour hackathon began at 3pm/);
     expect(container.querySelector("#day")?.textContent).toMatch(/six or seven hours on system design/);
     expect(container.querySelector("#day")?.textContent).toMatch(/first code came around 8 or 9pm/);

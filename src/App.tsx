@@ -86,7 +86,7 @@ function App() {
           <a href="#training">03 — Training objective</a>
           <a href="#laya">04 — Laya</a>
           <a href="#build">05 — Example use</a>
-          <a href="#day">06 — A short personal note</a>
+          <a href="#day">06 — How I used Jev in a hackathon</a>
         </aside>
         <div className="story">
           <section id="jev">
@@ -272,15 +272,89 @@ function App() {
           </section>
           <section id="day">
             <div className="section-no">
-              06 <span>—</span> A SHORT HACKATHON ANECDOTE
+              06 <span>—</span> A 24-HOUR HACKATHON
             </div>
-            <h2>One detail from the hackathon</h2>
+            <h2>How I used Jev in a hackathon</h2>
+            <p>
+              We used Jev in the reply-triage path. Incoming replies first went
+              through exact button or phrase rules. For everything else, Jev
+              classified the intent and tracked what the task was waiting on,
+              what remained, and how far it had progressed. A plain-code gate
+              then routed the task to blocked, complete, in progress, or human
+              review. If Jev was unsure, an LLM handled the fallback
+              classification. Every transition was recorded so we could trace
+              the decision and undo it if needed.
+            </p>
+            <figure className="hackathon-flow" aria-labelledby="hackathon-flow-caption">
+              <figcaption id="hackathon-flow-caption">
+                Reply triage: model judgments inform the workflow, while code
+                controls state changes.
+              </figcaption>
+              <div className="flow-start">Incoming reply</div>
+              <div className="flow-connector" aria-hidden="true" />
+              <div className="flow-decision">Button press or exact phrase?</div>
+              <div className="flow-branches">
+                <div className="flow-branch flow-branch-rules">
+                  <span className="flow-label">YES · MATCHED RULE</span>
+                  <div className="flow-node">Rules set confidence to 1.0</div>
+                  <div className="flow-connector" aria-hidden="true" />
+                  <div className="flow-node">Use the matched fields</div>
+                </div>
+                <div className="flow-branch flow-branch-jev">
+                  <span className="flow-label">NO · CHECK REPLY</span>
+                  <div className="flow-node flow-node-accent">
+                    <b>Jev classifies</b>
+                    <span>Intent · waiting on · work left · progress</span>
+                  </div>
+                  <div className="flow-connector" aria-hidden="true" />
+                  <div className="flow-decision">Confident enough?</div>
+                  <div className="flow-confidence-branches">
+                    <div><span className="flow-label">YES</span><div className="flow-node">Use Jev’s fields</div></div>
+                    <div className="flow-fallback">
+                      <span className="flow-label">NO</span>
+                      <div className="flow-node">LLM classification fallback</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flow-merge" aria-hidden="true"><span /> <span /> <span /></div>
+              <div className="flow-node flow-extract">
+                <b>Extract the useful fields</b>
+                <span>Blocker · ETA · proof URL</span>
+              </div>
+              <div className="flow-connector" aria-hidden="true" />
+              <div className="flow-decision">Plain-code gate</div>
+              <div className="flow-outcomes">
+                <div className="flow-outcome"><span className="flow-label">WAITING ON SOMEONE</span><div className="flow-node">Blocked, even if the reply says “done”</div></div>
+                <div className="flow-outcome"><span className="flow-label">DONE · NO HEADING · HIGH CONFIDENCE</span><div className="flow-node flow-node-accent">Complete</div></div>
+                <div className="flow-outcome"><span className="flow-label">PROGRESS</span><div className="flow-node">In progress</div></div>
+                <div className="flow-outcome"><span className="flow-label">UNCERTAIN</span><div className="flow-node flow-node-review">Ask the lead to review in chat</div></div>
+              </div>
+              <div className="flow-merge flow-event-merge" aria-hidden="true"><span /><span /><span /><span /></div>
+              <div className="flow-event">
+                <b>Record the transition</b>
+                <span>Old → new · gate · engine · confidence · trace · undo snapshot</span>
+              </div>
+              <p className="flow-note">
+                These are the stages of our implementation, not claims about
+                Jev’s internal reasoning. Rules and code handled routing;
+                Jev supplied a typed classification signal.
+              </p>
+            </figure>
+            <p>
+              The practical win was speed and a more predictable handoff. In
+              our implementation, we measured the Jev path at roughly 400 times
+              faster than our previous classification path, with latency in the
+              double-digit milliseconds. Those are our hackathon measurements,
+              not a general benchmark for Jev. Exact rules handled clear cases,
+              Jev handled natural-language replies, and the gate kept uncertain
+              or blocked work from being marked complete without review.
+            </p>
             <p>
               Our 24-hour hackathon began at 3pm. We spent the first six or
               seven hours on system design, so our first code came around 8 or
               9pm. The theory round came first, and we scored 100/100. That
-              result was a nice early boost; the long design discussion shaped
-              what we built next.
+              early score gave us a boost before the longer build began.
             </p>
           </section>
         </div>
