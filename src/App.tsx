@@ -317,7 +317,7 @@ function App() {
                   </div>
                 </div>
               </div>
-              <div className="flow-merge" aria-hidden="true"><span /> <span /> <span /></div>
+              <div className="flow-merge flow-merge-inputs" aria-hidden="true"><span /> <span /> <span /></div>
               <div className="flow-node flow-extract">
                 <b>Extract the useful fields</b>
                 <span>Blocker · ETA · proof URL</span>
@@ -330,7 +330,7 @@ function App() {
                 <div className="flow-outcome"><span className="flow-label">PROGRESS</span><div className="flow-node">In progress</div></div>
                 <div className="flow-outcome"><span className="flow-label">UNCERTAIN</span><div className="flow-node flow-node-review">Ask the lead to review in chat</div></div>
               </div>
-              <div className="flow-merge flow-event-merge" aria-hidden="true"><span /><span /><span /><span /></div>
+              <div className="flow-event-merge" aria-hidden="true"><span /><span /><span /><span /></div>
               <div className="flow-event">
                 <b>Record the transition</b>
                 <span>Old → new · gate · engine · confidence · trace · undo snapshot</span>
